@@ -1,9 +1,13 @@
-﻿namespace ExtratoSalarial.Core.Domain.Interfaces.Repositories
+﻿using ExtratoSalarial.Core.Seedwork;
+
+namespace ExtratoSalarial.Core.Domain.Interfaces.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<T> where T : Entity
     {
-        void Add(TEntity obj);
-        TEntity GetById(int id);
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(Guid id);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(Guid id, T entity);
+        Task DeleteAsync(Guid id);
     }
 }

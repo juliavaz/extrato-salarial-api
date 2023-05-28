@@ -1,3 +1,5 @@
+using ExtratoSalarial.Core.Domain.Interfaces.Repositorys;
+using ExtratoSalarial.Core.Infra;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
