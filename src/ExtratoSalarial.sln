@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtratoSalarial.Api", "src\ExtratoSalarial.Api\ExtratoSalarial.Api.csproj", "{A6304043-2572-42B6-8C1A-C673FA989F9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtratoSalarial.Api", "ExtratoSalarial.Api\ExtratoSalarial.Api.csproj", "{A6304043-2572-42B6-8C1A-C673FA989F9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtratoSalarial.Core", "src\ExtratoSalarial.Core\ExtratoSalarial.Core.csproj", "{0E32F182-B895-426F-8A1D-CE4616E4358A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtratoSalarial.Core", "ExtratoSalarial.Core\ExtratoSalarial.Core.csproj", "{0E32F182-B895-426F-8A1D-CE4616E4358A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtratoSalarial.Test", "src\ExtratoSalarial.Test\ExtratoSalarial.Test.csproj", "{0BF74C55-3436-497F-A519-B1E46AE586C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtratoSalarial.Test", "ExtratoSalarial.Test\ExtratoSalarial.Test.csproj", "{0BF74C55-3436-497F-A519-B1E46AE586C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
