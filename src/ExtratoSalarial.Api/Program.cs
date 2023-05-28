@@ -1,11 +1,19 @@
 using ExtratoSalarial.Core.Domain.Interfaces.Repositorys;
 using ExtratoSalarial.Core.Infra;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetValue<string>("Databases:ConnectionString");
+var databaseName = builder.Configuration.GetValue<string>("Databases:DatabaseName");
+var mongoClient = new MongoClient(connectionString);
+var mongoDatabase = mongoClient.GetDatabase(databaseName);
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>(x => new EmployeeRepository(mongoDatabase));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
