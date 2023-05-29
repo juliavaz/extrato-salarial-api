@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  extratosalarial.api:
+    image: ${DOCKER_REGISTRY-}extratosalarial.api
+    build:
+      context: .
+      dockerfile: ExtratoSalarial.Api/Dockerfile
+    depends_on:
+      - mongo
+    ports: 
+      - 8080:80
+      - 8090:443
+  mongo:
+    image: mongo
+    hostname: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: uAdmin
+      MONGO_INITDB_ROOT_PASSWORD: pAdmin
+    ports:
+      - 27017:27017
+    volumes:
+      - /obj/mongo:/data/db

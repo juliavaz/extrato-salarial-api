@@ -1,31 +1,15 @@
-﻿using ExtratoSalarial.Core.Domain.Entities;
-using ExtratoSalarial.Core.Domain.Interface.Services;
+﻿using ExtratoSalarial.Core.Domain.Interface.Services;
 using ExtratoSalarial.Core.Domain.Interfaces.Repositorys;
 
 namespace ExtratoSalarial.Core.Domain.Services
 {
-    public class ServiceEmployee : Service<Employee>, IServiceEmployee
+    public class ServiceEmployee : IServiceEmployee
     {
-        private readonly IRepositoryEmployee _repositoryEmployee;
+        private readonly IEmployeeRepository _repositoryEmployee;
 
-        public ServiceEmployee(IRepositoryEmployee repositoryEmployee) : base(repositoryEmployee)
+        public ServiceEmployee(IEmployeeRepository repositoryEmployee)
         {
-            repositoryEmployee = _repositoryEmployee;
-        }
-
-        public void Add(Employee obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Employee> IService<Employee>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Employee IService<Employee>.GetById(int id)
-        {
-            throw new NotImplementedException();
+            _repositoryEmployee = repositoryEmployee;
         }
     }
 }
