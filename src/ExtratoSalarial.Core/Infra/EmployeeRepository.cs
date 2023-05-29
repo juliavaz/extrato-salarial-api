@@ -1,5 +1,5 @@
 ﻿using ExtratoSalarial.Core.Domain.Entities;
-using ExtratoSalarial.Core.Domain.Interfaces.Repositorys;
+using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using MongoDB.Driver;
 
 namespace ExtratoSalarial.Core.Infra

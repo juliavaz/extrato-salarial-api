@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace ExtratoSalarial.Core.UseCases.GetEmployee
+namespace ExtratoSalarial.Core.Application.UseCases.GetEmployee
 {
     public class GetEmployeeInput
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public GetEmployeeInput() { }
 
     }

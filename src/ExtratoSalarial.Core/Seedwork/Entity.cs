@@ -1,7 +1,19 @@
-﻿namespace ExtratoSalarial.Core.Seedwork
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace ExtratoSalarial.Core.Seedwork
 {
-    public class Entity
+    public abstract class Entity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime? UpdatedAt { get; protected set; }
+
+        public void Initialize()
+        {
+            CreatedAt = DateTime.UtcNow;
+        }
     }
 }

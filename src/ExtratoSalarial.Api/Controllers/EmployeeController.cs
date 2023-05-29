@@ -1,3 +1,7 @@
+using ExtratoSalarial.Api.Extensions;
+using ExtratoSalarial.Core.Application.Interfaces;
+using ExtratoSalarial.Core.Application.UseCases;
+using ExtratoSalarial.Core.Application.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,39 +11,13 @@ namespace ExtratoSalarial.Api.Controllers
     [Route("api/employee")]
     public class EmployeeController : ControllerBase
     {
-        private static readonly List<Employee> Employees = new List<Employee>()
-        {
-            new Employee() {
-                Id = Guid.NewGuid(),
-                Nome = "Júlia",
-                Sobrenome = "Gomes",
-                Documento = "1234567890",
-                Setor = "Tecnologia",
-                SalarioBruto = 1000,
-                DataDeAdmissao = DateTime.Today.Date,
-                PlanoDeSaude = true,
-                PlanoDental = true,
-                ValeTransporte = false
-            },
-            new Employee() {
-                Id = Guid.NewGuid(),
-                Nome = "Paula",
-                Sobrenome = "Gomes",
-                Documento = "0987654321",
-                Setor = "Museologia",
-                SalarioBruto = 5000,
-                DataDeAdmissao = DateTime.Now.Date,
-                PlanoDeSaude = true,
-                PlanoDental = true,
-                ValeTransporte = true
-            },
-        };
-
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IRequestHandler<PostEmployeeInput, ResponseUseCase> _postEmployee;
 
-        public EmployeeController(ILogger<EmployeeController> logger)
+        public EmployeeController(ILogger<EmployeeController> logger, IRequestHandler<PostEmployeeInput, ResponseUseCase> postEmployee)
         {
             _logger = logger;
+            _postEmployee = postEmployee;
         }
 
         /// <summary>
@@ -50,7 +28,7 @@ namespace ExtratoSalarial.Api.Controllers
         [Route("")]
         public IEnumerable<Employee> GetEmployees()
         {
-            return Employees.ToArray();
+            return null;
         }
 
         /// <summary>
@@ -60,7 +38,7 @@ namespace ExtratoSalarial.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Employee>> GetById(Guid id)
+        public async Task<ActionResult<Employee>> GetById(string id)
         {
             return Ok();
         }
@@ -73,19 +51,18 @@ namespace ExtratoSalarial.Api.Controllers
         /// /// <remarks>
         /// Sample request:
         /// 
-        ///     POST /Employee
         ///     {
-        ///        "Nome": "Júlia",
-        ///        "Sobrenome": "Gomes",
-        ///        "Documento" : "32051337144",
-        ///        "Setor": "Tecnologia",
-        ///        "SalarioBruto": 1000,
-        ///        "DataDeAdmissao": "2023-08-21",
-        ///        "PlanoDeSaude": true,
-        ///        "PlanoDental": true,
-        ///        "ValeTransporte": false
+        ///       "nome": "Júlia",
+        ///       "sobrenome": "Gomes",
+        ///       "documento": "320.513.371-44",
+        ///       "setor": "Tecnologia",
+        ///       "salarioBruto": 1000,
+        ///       "dataDeAdmissao": "2023-08-21",
+        ///       "planoDeSaude": true,
+        ///       "planoDental": true,
+        ///       "valeTransporte": false
         ///     }
-        ///     
+        ///
         /// </remarks>
         /// <response code="201">Returns the newly created employee</response>
         /// <response code="400">If the employee is null</response>
@@ -93,9 +70,10 @@ namespace ExtratoSalarial.Api.Controllers
         [Route("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(PostEmployeeInput input)
         {
-            return Ok();
+            var useCase = await _postEmployee.Handle(input);
+            return this.ResponseFromUseCase(useCase);
         }
     }
 }

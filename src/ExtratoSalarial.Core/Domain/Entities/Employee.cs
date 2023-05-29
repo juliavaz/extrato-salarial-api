@@ -4,14 +4,38 @@ namespace ExtratoSalarial.Core.Domain.Entities
 {
     public class Employee : Entity
     {
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public string Documento { get; set; }
-        public string Setor { get; set; }
-        public int SalarioBruto { get; set; }
-        public DateTime DataDeAdmissao { get; set; }
-        public bool PlanoDeSaude { get; set; }
-        public bool PlanoDental { get; set; }
-        public bool ValeTransporte { get; set; }
+        public Employee() { }
+        public Employee(
+            string nome,
+            string sobrenome,
+            string documento,
+            string setor,
+            decimal salarioBruto,
+            DateTime dataDeAdmissao,
+            bool planoDeSaude,
+            bool planoDental,
+            bool valeTransporte)
+        {
+            Nome = nome;
+            Sobrenome = sobrenome;
+            Documento = documento;
+            Setor = setor;
+            SalarioBruto = salarioBruto;
+            DataDeAdmissao = dataDeAdmissao;
+            PlanoDeSaude = planoDeSaude;
+            PlanoDental = planoDental;
+            ValeTransporte = valeTransporte;
+            Initialize();
+        }
+
+        public string Nome { get; private set; }
+        public string Sobrenome { get; private set; }
+        public string Documento { get; private set; }
+        public string Setor { get; private set; }
+        public decimal SalarioBruto { get; private set; }
+        public DateTime DataDeAdmissao { get; private set; }
+        public bool PlanoDeSaude { get; private set; }
+        public bool PlanoDental { get; private set; }
+        public bool ValeTransporte { get; private set; }
     }
 }

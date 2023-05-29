@@ -1,17 +1,17 @@
-﻿namespace ExtratoSalarial.Core.UseCases.GetEmployee
+﻿namespace ExtratoSalarial.Core.Application.UseCases.GetEmployee
 {
     public class GetEmployeeOutput
     {
-        public GetEmployeeOutput(Guid id)
+        public GetEmployeeOutput(string id)
         {
             Id = id;
         }
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Documento { get; set; }
         public string Setor { get; set; }
-        public int SalarioBruto { get; set; }
+        public decimal SalarioBruto { get; set; }
         public DateTime DataDeAdmissao { get; set; }
         public bool PlanoDeSaude { get; set; }
         public bool PlanoDental { get; set; }
