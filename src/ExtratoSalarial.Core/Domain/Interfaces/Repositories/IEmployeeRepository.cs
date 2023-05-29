@@ -1,7 +1,6 @@
 ﻿using ExtratoSalarial.Core.Domain.Entities;
-using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 
-namespace ExtratoSalarial.Core.Domain.Interfaces.Repositorys
+namespace ExtratoSalarial.Core.Domain.Interfaces.Repositories
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {

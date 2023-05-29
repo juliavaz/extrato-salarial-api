@@ -5,9 +5,9 @@ namespace ExtratoSalarial.Core.Domain.Interfaces.Repositories
     public interface IRepository<T> where T : Entity
     {
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(string id);
         Task CreateAsync(T entity);
-        Task UpdateAsync(Guid id, T entity);
-        Task DeleteAsync(Guid id);
+        Task UpdateAsync(string id, T entity);
+        Task DeleteAsync(string id);
     }
 }
