@@ -1,7 +1,7 @@
-using ExtratoSalarial.Core.Application.Interfaces;
-using ExtratoSalarial.Core.Application.UseCases;
-using ExtratoSalarial.Core.Application.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
+using ExtratoSalarial.Core.Domain.Interfaces.Requests;
+using ExtratoSalarial.Core.Domain.UseCases;
+using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Infra;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;

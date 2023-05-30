@@ -1,4 +1,4 @@
-﻿using ExtratoSalarial.Core.Seedwork;
+﻿using System.ComponentModel;
 
 namespace ExtratoSalarial.Core.Domain.Entities
 {
@@ -34,8 +34,14 @@ namespace ExtratoSalarial.Core.Domain.Entities
         public string Setor { get; private set; }
         public decimal SalarioBruto { get; private set; }
         public DateTime DataDeAdmissao { get; private set; }
+
+        [DefaultValue(false)]
         public bool PlanoDeSaude { get; private set; }
+
+        [DefaultValue(false)]
         public bool PlanoDental { get; private set; }
+
+        [DefaultValue(false)]
         public bool ValeTransporte { get; private set; }
     }
 }

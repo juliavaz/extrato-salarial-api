@@ -1,4 +1,4 @@
-﻿namespace ExtratoSalarial.Core.Application.Interfaces
+﻿namespace ExtratoSalarial.Core.Domain.Interfaces.Requests
 {
     public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {

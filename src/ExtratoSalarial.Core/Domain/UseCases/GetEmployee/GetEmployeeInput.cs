@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace ExtratoSalarial.Core.Application.UseCases.GetEmployee
+namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployee
 {
     public class GetEmployeeInput
     {

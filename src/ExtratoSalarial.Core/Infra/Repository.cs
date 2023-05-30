@@ -1,4 +1,4 @@
-﻿using ExtratoSalarial.Core.Seedwork;
+﻿using ExtratoSalarial.Core.Domain.Entities;
 using MongoDB.Driver;
 
 namespace ExtratoSalarial.Core.Infra

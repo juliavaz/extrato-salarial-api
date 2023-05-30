@@ -1,4 +1,4 @@
-﻿using ExtratoSalarial.Core.Seedwork;
+﻿using ExtratoSalarial.Core.Domain.Entities;
 
 namespace ExtratoSalarial.Core.Domain.Interfaces.Repositories
 {

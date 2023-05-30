@@ -1,4 +1,4 @@
-﻿namespace ExtratoSalarial.Core.Application.UseCases.PostEmployee
+﻿namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
 {
     public class PostEmployeeOutput
     {

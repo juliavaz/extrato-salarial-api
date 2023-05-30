@@ -1,7 +1,7 @@
-﻿using ExtratoSalarial.Core.Application.Interfaces;
+﻿using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using FluentValidation;
 
-namespace ExtratoSalarial.Core.Application.UseCases.PostEmployee
+namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
 {
     public class PostEmployeeInput : IRequest<ResponseUseCase>
     {
