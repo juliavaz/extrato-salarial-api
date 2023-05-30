@@ -1,8 +1,8 @@
-﻿using ExtratoSalarial.Core.Application.Interfaces;
-using ExtratoSalarial.Core.Domain.Entities;
+﻿using ExtratoSalarial.Core.Domain.Entities;
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
+using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 
-namespace ExtratoSalarial.Core.Application.UseCases.PostEmployee
+namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
 {
     public class PostEmployeeUseCase : IRequestHandler<PostEmployeeInput, ResponseUseCase>
     {

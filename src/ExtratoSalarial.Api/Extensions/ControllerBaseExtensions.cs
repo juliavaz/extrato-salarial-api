@@ -1,4 +1,4 @@
-﻿using ExtratoSalarial.Core.Application.UseCases;
+﻿using ExtratoSalarial.Core.Domain.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExtratoSalarial.Api.Extensions

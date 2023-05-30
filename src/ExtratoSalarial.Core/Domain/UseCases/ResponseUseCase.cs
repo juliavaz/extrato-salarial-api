@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using System.Net;
 
-namespace ExtratoSalarial.Core.Application.UseCases
+namespace ExtratoSalarial.Core.Domain.UseCases
 {
     public class ResponseUseCase
     {

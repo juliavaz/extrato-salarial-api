@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ExtratoSalarial.Core.Seedwork
+namespace ExtratoSalarial.Core.Domain.Entities
 {
     public abstract class Entity
     {

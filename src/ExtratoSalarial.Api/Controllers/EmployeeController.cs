@@ -1,8 +1,8 @@
 using ExtratoSalarial.Api.Extensions;
-using ExtratoSalarial.Core.Application.Interfaces;
-using ExtratoSalarial.Core.Application.UseCases;
-using ExtratoSalarial.Core.Application.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Domain.Entities;
+using ExtratoSalarial.Core.Domain.Interfaces.Requests;
+using ExtratoSalarial.Core.Domain.UseCases;
+using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExtratoSalarial.Api.Controllers
@@ -59,7 +59,7 @@ namespace ExtratoSalarial.Api.Controllers
         ///       "salarioBruto": 1000,
         ///       "dataDeAdmissao": "2023-08-21",
         ///       "planoDeSaude": true,
-        ///       "planoDental": true,
+        ///       "planoDental": true, 
         ///       "valeTransporte": false
         ///     }
         ///

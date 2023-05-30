@@ -1,5 +1,4 @@
 ﻿using ExtratoSalarial.Core.Domain.Enums;
-using ExtratoSalarial.Core.Seedwork;
 
 namespace ExtratoSalarial.Core.Domain.Entities
 {
