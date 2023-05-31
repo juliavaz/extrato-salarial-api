@@ -1,4 +1,5 @@
 ﻿using ExtratoSalarial.Core.Domain.Entities;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace ExtratoSalarial.Core.Infra
@@ -19,7 +20,7 @@ namespace ExtratoSalarial.Core.Infra
 
         public async Task<T> GetByIdAsync(string id)
         {
-            var filter = Builders<T>.Filter.Eq("_id", id);
+            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
             return await _collection.Find(filter).FirstOrDefaultAsync();
         }
 

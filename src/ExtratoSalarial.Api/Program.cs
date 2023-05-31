@@ -1,6 +1,8 @@
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using ExtratoSalarial.Core.Domain.UseCases;
+using ExtratoSalarial.Core.Domain.UseCases.GetEmployee;
+using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Infra;
 using Microsoft.OpenApi.Models;
@@ -14,10 +16,12 @@ var connectionString = builder.Configuration.GetValue<string>("Databases:Connect
 var databaseName = builder.Configuration.GetValue<string>("Databases:DatabaseName");
 var mongoClient = new MongoClient(connectionString);
 var mongoDatabase = mongoClient.GetDatabase(databaseName);
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>(x => new EmployeeRepository(mongoDatabase));
 
 // Add dependency injection
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>(x => new EmployeeRepository(mongoDatabase));
 builder.Services.AddScoped<IRequestHandler<PostEmployeeInput, ResponseUseCase>, PostEmployeeUseCase>();
+builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdInput, ResponseUseCase>, GetEmployeeByIdUseCase>();
+builder.Services.AddScoped<IRequestHandler<GetEmployeeInput, ResponseUseCase>, GetEmployeeUseCase>();
 
 
 builder.Services.AddControllers();

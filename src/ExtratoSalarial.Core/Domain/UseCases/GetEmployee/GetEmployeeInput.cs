@@ -1,20 +1,8 @@
-﻿using FluentValidation;
+﻿using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 
 namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployee
 {
-    public class GetEmployeeInput
+    public class GetEmployeeInput : IRequest<ResponseUseCase>
     {
-        public string Id { get; set; }
-        public GetEmployeeInput() { }
-
-    }
-
-    public class GetEmployeeInputValidation : AbstractValidator<GetEmployeeInput>
-    {
-        public GetEmployeeInputValidation()
-        {
-            RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("Informe o Id do funcionário");
-        }
     }
 }
