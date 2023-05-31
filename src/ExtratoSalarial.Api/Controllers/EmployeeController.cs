@@ -2,22 +2,27 @@ using ExtratoSalarial.Api.Extensions;
 using ExtratoSalarial.Core.Domain.Entities;
 using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using ExtratoSalarial.Core.Domain.UseCases;
+using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExtratoSalarial.Api.Controllers
 {
     [ApiController]
-    [Route("api/employee")]
+    [Route("api/employees")]
     public class EmployeeController : ControllerBase
     {
         private readonly ILogger<EmployeeController> _logger;
         private readonly IRequestHandler<PostEmployeeInput, ResponseUseCase> _postEmployee;
+        private readonly IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> _getEmployeeById;
 
-        public EmployeeController(ILogger<EmployeeController> logger, IRequestHandler<PostEmployeeInput, ResponseUseCase> postEmployee)
+        public EmployeeController(ILogger<EmployeeController> logger,
+            IRequestHandler<PostEmployeeInput, ResponseUseCase> postEmployee,
+            IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> getEmployeeById)
         {
             _logger = logger;
             _postEmployee = postEmployee;
+            _getEmployeeById = getEmployeeById;
         }
 
         /// <summary>
@@ -38,9 +43,14 @@ namespace ExtratoSalarial.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult<Employee>> GetById(string id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(string id)
         {
-            return Ok();
+            var input = new GetEmployeeByIdInput { Id = id };
+            var useCase = await _getEmployeeById.Handle(input);
+            return this.ResponseFromUseCase(useCase);
         }
 
 
