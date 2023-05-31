@@ -1,7 +1,7 @@
 using ExtratoSalarial.Api.Extensions;
-using ExtratoSalarial.Core.Domain.Entities;
 using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using ExtratoSalarial.Core.Domain.UseCases;
+using ExtratoSalarial.Core.Domain.UseCases.GetEmployee;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using Microsoft.AspNetCore.Mvc;
@@ -15,25 +15,33 @@ namespace ExtratoSalarial.Api.Controllers
         private readonly ILogger<EmployeeController> _logger;
         private readonly IRequestHandler<PostEmployeeInput, ResponseUseCase> _postEmployee;
         private readonly IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> _getEmployeeById;
+        private readonly IRequestHandler<GetEmployeeInput, ResponseUseCase> _getEmployee;
 
         public EmployeeController(ILogger<EmployeeController> logger,
             IRequestHandler<PostEmployeeInput, ResponseUseCase> postEmployee,
-            IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> getEmployeeById)
+            IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> getEmployeeById,
+            IRequestHandler<GetEmployeeInput, ResponseUseCase> getEmployee)
         {
             _logger = logger;
             _postEmployee = postEmployee;
             _getEmployeeById = getEmployeeById;
+            _getEmployee = getEmployee;
         }
 
         /// <summary>
-        /// Endpoint para obter os dados de todos os funcionários
+        /// Endpoint para obter todos os dados dos funcionários
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public IEnumerable<Employee> GetEmployees()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get()
         {
-            return null;
+            var input = new GetEmployeeInput();
+            var useCase = await _getEmployee.Handle(input);
+            return this.ResponseFromUseCase(useCase);
         }
 
         /// <summary>
@@ -46,7 +54,7 @@ namespace ExtratoSalarial.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(string id)
+        public async Task<IActionResult> GetById([FromRoute] string id)
         {
             var input = new GetEmployeeByIdInput { Id = id };
             var useCase = await _getEmployeeById.Handle(input);
