@@ -49,7 +49,7 @@ namespace ExtratoSalarial.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint para obter dados do funcionário
+        /// Endpoint para obter dados por funcionário
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

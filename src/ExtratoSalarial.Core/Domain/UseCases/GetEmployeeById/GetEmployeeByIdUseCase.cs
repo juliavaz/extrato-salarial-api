@@ -14,7 +14,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById
 
         public async Task<ResponseUseCase> Handle(GetEmployeeByIdInput request)
         {
-            var validation = new GetEmployeeByIdInputValidation();
+            var validation = new GetEmployeeByIdValidation();
             var validationResult = validation.Validate(request);
 
             if (!validationResult.IsValid)
@@ -23,6 +23,10 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById
             }
 
             var employee = await _employeeRepository.GetByIdAsync(request.Id);
+            if (employee is null)
+            {
+                return ResponseUseCase.NotFound("Funcionário não consta na base de dados.");
+            }
 
             var output = new GetEmployeeByIdOutput(
                 employee.Id,
