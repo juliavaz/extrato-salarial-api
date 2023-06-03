@@ -6,16 +6,17 @@ namespace ExtratoSalarial.Test.Domain.Entities
     public class HealthInsuranceTest
     {
         [Theory]
-        [InlineData(true, 990)]
-        [InlineData(false, 1000)]
-        public void Calculated(bool planoDeSaude, decimal salarioBruto)
+        [InlineData(true, 10)]
+        [InlineData(false, 0)]
+        public void Calculated(bool planoDeSaude, decimal desconto)
         {
-            var employee = BaseMock.BuildEmployee(planoDeSaude: planoDeSaude, salarioBruto: 1000);
-            var healthInsurance = new HealthInsurance();
+            var salarioBruto = 1000;
+            var employee = BaseMock.BuildEmployee(planoDeSaude: planoDeSaude, salarioBruto: salarioBruto);
 
+            var healthInsurance = new HealthInsurance();
             var result = healthInsurance.Calculate(employee);
 
-            Assert.Equal(salarioBruto, result);
+            Assert.Equal(desconto, result);
         }
     }
 }

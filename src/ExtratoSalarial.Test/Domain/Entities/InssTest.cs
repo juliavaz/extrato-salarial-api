@@ -6,23 +6,23 @@ namespace ExtratoSalarial.Test.Domain.Entities
     public class InssTest
     {
         [Theory]
-        [InlineData(1045, 966.62)]
-        [InlineData(1045.01, 950.96)]
-        [InlineData(2089.60, 1901.54)]
-        [InlineData(2089.61, 1838.86)]
-        [InlineData(3134.40, 2758.27)]
-        [InlineData(3134.41, 2695.59)]
-        [InlineData(6101.06, 5246.91)]
-        [InlineData(7000, 6020.00)]
-        [InlineData(10045.01, 8638.71)]
-        public void Calculated(decimal salarioBruto, decimal salarioBrutoResult)
+        [InlineData(1045, 78.38)]
+        [InlineData(1045.01, 94.05)]
+        [InlineData(2089.60, 188.06)]
+        [InlineData(2089.61, 250.75)]
+        [InlineData(3134.40, 376.13)]
+        [InlineData(3134.41, 438.82)]
+        [InlineData(6101.06, 854.15)]
+        [InlineData(7000, 980)]
+        [InlineData(10045.01, 1406.30)]
+        public void Calculated(decimal salarioBruto, decimal desconto)
         {
             var employee = BaseMock.BuildEmployee(salarioBruto: salarioBruto);
-            var inss = new Inss();
 
+            var inss = new Inss();
             var result = inss.Calculate(employee);
 
-            Assert.Equal(salarioBrutoResult, result);
+            Assert.Equal(desconto, result);
         }
     }
 }
