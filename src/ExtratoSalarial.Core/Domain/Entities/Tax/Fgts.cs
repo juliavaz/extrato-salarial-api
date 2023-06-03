@@ -4,8 +4,8 @@
     {
         public override decimal Calculate(Employee employee)
         {
-            var result = employee.SalarioBruto - (employee.SalarioBruto * (8m / 100m));
-            return result;
+            var desconto = employee.SalarioBruto * (8m / 100m);
+            return decimal.Round(desconto, 2);
         }
     }
 }

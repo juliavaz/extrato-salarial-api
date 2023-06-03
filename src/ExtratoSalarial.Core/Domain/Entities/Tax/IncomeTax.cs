@@ -14,7 +14,7 @@
             };
             if (aliquota == 0)
             {
-                return employee.SalarioBruto;
+                return aliquota;
             }
 
             var parcela = aliquota switch
@@ -32,9 +32,7 @@
                 desconto = parcela;
             }
 
-            var result = employee.SalarioBruto - desconto;
-
-            return decimal.Round(result, 2);
+            return decimal.Round(desconto, 2);
         }
     }
 }

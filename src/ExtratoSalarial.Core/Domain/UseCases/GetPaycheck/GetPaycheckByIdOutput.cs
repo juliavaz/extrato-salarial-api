@@ -1,6 +1,4 @@
-﻿using ExtratoSalarial.Core.Domain.Enums;
-
-namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
+﻿namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
 {
     public class GetPaycheckByIdOutput
     {
@@ -10,7 +8,6 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
             decimal salarioBruto,
             decimal totalDeDescontos,
             decimal salarioLiquido,
-            DateTime createdAt,
             List<EntriesData> lancamentos)
 
         {
@@ -19,7 +16,6 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
             SalarioBruto = salarioBruto;
             TotalDeDescontos = totalDeDescontos;
             SalarioLiquido = salarioLiquido;
-            CreatedAt = createdAt;
             Lancamentos = lancamentos;
         }
         public string FuncionarioId { get; set; }
@@ -27,14 +23,13 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
         public decimal SalarioBruto { get; set; }
         public decimal TotalDeDescontos { get; set; }
         public decimal SalarioLiquido { get; set; }
-        public DateTime CreatedAt { get; set; }
         public List<EntriesData> Lancamentos { get; set; }
     }
 
     public class EntriesData
     {
-        public EEntriesType Tipo { get; set; }
+        public string Tipo { get; set; }
         public decimal Valor { get; set; }
-        public EDescriptionType Descricao { get; set; }
+        public string Descricao { get; set; }
     }
 }
