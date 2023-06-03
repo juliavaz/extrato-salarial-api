@@ -13,9 +13,9 @@
                 _ => 14m
             };
 
-            var result = employee.SalarioBruto - (employee.SalarioBruto * (aliquota / 100m));
+            var desconto = employee.SalarioBruto * (aliquota / 100m);
 
-            return decimal.Round(result, 2);
+            return decimal.Round(desconto, 2);
         }
     }
 }

@@ -3,6 +3,7 @@ using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using ExtratoSalarial.Core.Domain.UseCases;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployee;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
+using ExtratoSalarial.Core.Domain.UseCases.GetPaycheck;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using ExtratoSalarial.Core.Infra;
 using Microsoft.OpenApi.Models;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>(x => new Emp
 builder.Services.AddScoped<IRequestHandler<PostEmployeeInput, ResponseUseCase>, PostEmployeeUseCase>();
 builder.Services.AddScoped<IRequestHandler<GetEmployeeByIdInput, ResponseUseCase>, GetEmployeeByIdUseCase>();
 builder.Services.AddScoped<IRequestHandler<GetEmployeeInput, ResponseUseCase>, GetEmployeeUseCase>();
+builder.Services.AddScoped<IRequestHandler<GetPaycheckByIdInput, ResponseUseCase>, GetPaycheckByIdUseCase>();
 
 
 builder.Services.AddControllers();

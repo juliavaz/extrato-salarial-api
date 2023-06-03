@@ -5,14 +5,14 @@
         public override decimal Calculate(Employee employee)
         {
             if (!employee.ValeTransporte)
-                return employee.SalarioBruto;
+                return 0;
 
             if (employee.SalarioBruto < 1500)
-                return employee.SalarioBruto;
+                return 0;
 
-            var result = employee.SalarioBruto - (employee.SalarioBruto * (6m / 100m));
+            var desconto = employee.SalarioBruto * (6m / 100m);
 
-            return result;
+            return decimal.Round(desconto, 2);
         }
     }
 }

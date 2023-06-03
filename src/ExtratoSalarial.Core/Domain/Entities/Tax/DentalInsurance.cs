@@ -6,9 +6,9 @@
         {
             if (!employee.PlanoDental)
             {
-                return employee.SalarioBruto;
+                return 0;
             }
-            return employee.SalarioBruto - 5;
+            return 5;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
 
         public async Task<ResponseUseCase> Handle(PostEmployeeInput request)
         {
-            var validator = new PostEmployeeInputValidation();
+            var validator = new PostEmployeeValidation();
             var validationResult = validator.Validate(request);
 
             if (!validationResult.IsValid)

@@ -3,6 +3,7 @@ using ExtratoSalarial.Core.Domain.Interfaces.Requests;
 using ExtratoSalarial.Core.Domain.UseCases;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployee;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
+using ExtratoSalarial.Core.Domain.UseCases.GetPaycheck;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +17,19 @@ namespace ExtratoSalarial.Api.Controllers
         private readonly IRequestHandler<PostEmployeeInput, ResponseUseCase> _postEmployee;
         private readonly IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> _getEmployeeById;
         private readonly IRequestHandler<GetEmployeeInput, ResponseUseCase> _getEmployee;
+        private readonly IRequestHandler<GetPaycheckByIdInput, ResponseUseCase> _getPaycheckById;
 
         public EmployeeController(ILogger<EmployeeController> logger,
             IRequestHandler<PostEmployeeInput, ResponseUseCase> postEmployee,
             IRequestHandler<GetEmployeeByIdInput, ResponseUseCase> getEmployeeById,
-            IRequestHandler<GetEmployeeInput, ResponseUseCase> getEmployee)
+            IRequestHandler<GetEmployeeInput, ResponseUseCase> getEmployee,
+            IRequestHandler<GetPaycheckByIdInput, ResponseUseCase> getPaycheckById)
         {
             _logger = logger;
             _postEmployee = postEmployee;
             _getEmployeeById = getEmployeeById;
             _getEmployee = getEmployee;
+            _getPaycheckById = getPaycheckById;
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace ExtratoSalarial.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint para obter dados do funcionário
+        /// Endpoint para obter dados por funcionário
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -91,6 +95,23 @@ namespace ExtratoSalarial.Api.Controllers
         public async Task<IActionResult> Create(PostEmployeeInput input)
         {
             var useCase = await _postEmployee.Handle(input);
+            return this.ResponseFromUseCase(useCase);
+        }
+
+        /// <summary>
+        /// Endpoint para obter extrato de contracheque por funcionário
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("paycheck/{employeeId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetPaycheckByEmployee([FromRoute] string employeeId)
+        {
+            var input = new GetPaycheckByIdInput { FuncionarioId = employeeId };
+            var useCase = await _getPaycheckById.Handle(input);
             return this.ResponseFromUseCase(useCase);
         }
     }

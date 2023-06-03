@@ -9,9 +9,9 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById
         public GetEmployeeByIdInput() { }
     }
 
-    public class GetEmployeeByIdInputValidation : AbstractValidator<GetEmployeeByIdInput>
+    public class GetEmployeeByIdValidation : AbstractValidator<GetEmployeeByIdInput>
     {
-        public GetEmployeeByIdInputValidation()
+        public GetEmployeeByIdValidation()
         {
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("Informe o Id do funcionário")

@@ -6,9 +6,9 @@
         {
             if (!employee.PlanoDeSaude)
             {
-                return employee.SalarioBruto;
+                return 0;
             }
-            return employee.SalarioBruto - 10;
+            return 10;
         }
     }
 }

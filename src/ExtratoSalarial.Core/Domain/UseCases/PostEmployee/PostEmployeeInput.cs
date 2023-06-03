@@ -16,9 +16,9 @@ namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
         public bool? ValeTransporte { get; set; }
     }
 
-    public class PostEmployeeInputValidation : AbstractValidator<PostEmployeeInput>
+    public class PostEmployeeValidation : AbstractValidator<PostEmployeeInput>
     {
-        public PostEmployeeInputValidation()
+        public PostEmployeeValidation()
         {
             RuleFor(x => x.Nome)
                 .NotEmpty().WithMessage("Informe o nome do funcionário")
