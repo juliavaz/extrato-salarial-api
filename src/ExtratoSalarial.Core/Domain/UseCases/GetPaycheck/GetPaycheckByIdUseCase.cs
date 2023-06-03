@@ -36,7 +36,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
             var fgtsResult = new Fgts().Calculate(employee);
             var vtResult = new Vt().Calculate(employee);
 
-            var totalDeDescontos = -(inssResult + irResult + dentalInsuranceResult + healthInsuranceResult + fgtsResult + vtResult);
+            var totalDeDescontos = inssResult + irResult + dentalInsuranceResult + healthInsuranceResult + fgtsResult + vtResult;
             var salarioLiquidoResult = employee.SalarioBruto - totalDeDescontos;
 
             var entriesList = new List<EntriesData> {
@@ -54,7 +54,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
                 employee.Id,
                 employee.DataDeAdmissao.Month.ToString(),
                 employee.SalarioBruto,
-                totalDeDescontos,
+                -totalDeDescontos,
                 salarioLiquidoResult,
                 entriesList
             ); ;
