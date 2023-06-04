@@ -2,15 +2,15 @@
 {
     public class GetEmployeeOutput
     {
-        public GetEmployeeOutput(List<GetEmployeeData> data)
+        public GetEmployeeOutput(List<EmployeeData> data)
         {
             Data = data;
         }
 
-        public List<GetEmployeeData> Data { get; set; }
+        public List<EmployeeData> Data { get; set; }
     }
 
-    public class GetEmployeeData
+    public class EmployeeData
     {
         public string Id { get; set; }
         public string Nome { get; set; }

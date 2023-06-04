@@ -30,7 +30,7 @@ namespace ExtratoSalarial.Test.Domain.UseCases
             var response = await useCase.Handle(_input);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Single((IEnumerable<Employee>)response.Result);
+            Assert.Single(((GetEmployeeOutput)response.Result).Data);
             _employeeRepository.Verify(x => x.GetAllAsync(), Times.Once);
         }
     }
