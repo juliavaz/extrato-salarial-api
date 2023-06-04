@@ -14,7 +14,25 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployee
 
         public async Task<ResponseUseCase> Handle(GetEmployeeInput request)
         {
-            var output = await _employeeRepository.GetAllAsync();
+            var employees = await _employeeRepository.GetAllAsync();
+
+            var employeeDatas = employees.Select(x =>
+                new EmployeeData()
+                {
+                    Id = x.Id,
+                    Nome = x.Nome,
+                    Sobrenome = x.Sobrenome,
+                    Documento = x.Documento,
+                    Setor = x.Setor,
+                    SalarioBruto = x.SalarioBruto,
+                    DataDeAdmissao = x.DataDeAdmissao,
+                    PlanoDeSaude = x.PlanoDeSaude,
+                    PlanoDental = x.PlanoDental,
+                    ValeTransporte = x.ValeTransporte,
+                    CreatedAt = x.CreatedAt
+                });
+
+            var output = new GetEmployeeOutput(employeeDatas.ToList());
 
             return ResponseUseCase.Ok(output);
         }
