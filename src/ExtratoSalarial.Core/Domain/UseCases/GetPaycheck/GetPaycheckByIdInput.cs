@@ -16,7 +16,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
         {
             RuleFor(x => x.FuncionarioId)
                 .NotEmpty().WithMessage("Informe o Id do funcionário")
-                .Length(24, 24).WithMessage("A propriedade deve ter 24 caracteres.");
+                .Length(24).WithMessage("A propriedade deve ter 24 caracteres.");
         }
     }
 }

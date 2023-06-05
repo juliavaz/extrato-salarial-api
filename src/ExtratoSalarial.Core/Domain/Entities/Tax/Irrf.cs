@@ -1,6 +1,6 @@
 ﻿namespace ExtratoSalarial.Core.Domain.Entities.Tax
 {
-    public class IncomeTax : Tax
+    public class Irrf : Tax
     {
         public override decimal Calculate(Employee employee)
         {

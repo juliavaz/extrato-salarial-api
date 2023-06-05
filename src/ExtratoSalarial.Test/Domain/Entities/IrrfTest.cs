@@ -3,7 +3,7 @@ using ExtratoSalarial.Test.Mocks;
 
 namespace ExtratoSalarial.Test.Domain.Entities
 {
-    public class IncomeTaxTest
+    public class IrrfTest
     {
         [Theory]
         [InlineData(1903.89, 0)]
@@ -17,7 +17,7 @@ namespace ExtratoSalarial.Test.Domain.Entities
         {
             var employee = BaseMock.BuildEmployee(salarioBruto: salarioBruto);
 
-            var incomeTax = new IncomeTax();
+            var incomeTax = new Irrf();
             var result = incomeTax.Calculate(employee);
 
             Assert.Equal(desconto, result);

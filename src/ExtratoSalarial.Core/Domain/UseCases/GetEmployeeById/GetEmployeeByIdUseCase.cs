@@ -1,21 +1,23 @@
 ﻿using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using ExtratoSalarial.Core.Domain.Interfaces.Requests;
+using FluentValidation;
 
 namespace ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById
 {
     public class GetEmployeeByIdUseCase : IRequestHandler<GetEmployeeByIdInput, ResponseUseCase>
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IValidator<GetEmployeeByIdInput> _validator;
 
-        public GetEmployeeByIdUseCase(IEmployeeRepository employeeRepository)
+        public GetEmployeeByIdUseCase(IEmployeeRepository employeeRepository, IValidator<GetEmployeeByIdInput> validator)
         {
             _employeeRepository = employeeRepository;
+            _validator = validator;
         }
 
         public async Task<ResponseUseCase> Handle(GetEmployeeByIdInput request)
         {
-            var validation = new GetEmployeeByIdValidation();
-            var validationResult = validation.Validate(request);
+            var validationResult = _validator.Validate(request);
 
             if (!validationResult.IsValid)
             {

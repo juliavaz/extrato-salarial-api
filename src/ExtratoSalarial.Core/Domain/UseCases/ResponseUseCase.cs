@@ -38,9 +38,6 @@ namespace ExtratoSalarial.Core.Domain.UseCases
         public static ResponseUseCase Created(object result)
             => new(HttpStatusCode.Created, result);
 
-        public static ResponseUseCase BadRequest(IEnumerable<string> errors)
-            => new(HttpStatusCode.BadRequest, errors);
-
         public static ResponseUseCase BadRequest(List<ValidationFailure> validationErrors)
             => new(validationErrors);
 

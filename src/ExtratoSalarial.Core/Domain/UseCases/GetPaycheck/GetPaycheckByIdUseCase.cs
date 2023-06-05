@@ -1,22 +1,24 @@
 ﻿using ExtratoSalarial.Core.Domain.Entities.Tax;
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using ExtratoSalarial.Core.Domain.Interfaces.Requests;
+using FluentValidation;
 
 namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
 {
     public class GetPaycheckByIdUseCase : IRequestHandler<GetPaycheckByIdInput, ResponseUseCase>
     {
         public readonly IEmployeeRepository _employeeRepository;
+        private readonly IValidator<GetPaycheckByIdInput> _validator;
 
-        public GetPaycheckByIdUseCase(IEmployeeRepository employeeRepository)
+        public GetPaycheckByIdUseCase(IEmployeeRepository employeeRepository, IValidator<GetPaycheckByIdInput> validator)
         {
             _employeeRepository = employeeRepository;
+            _validator = validator;
         }
 
         public async Task<ResponseUseCase> Handle(GetPaycheckByIdInput request)
         {
-            var validation = new GetPaycheckByIdValidation();
-            var validationResult = validation.Validate(request);
+            var validationResult = _validator.Validate(request);
 
             if (!validationResult.IsValid)
             {
@@ -30,44 +32,36 @@ namespace ExtratoSalarial.Core.Domain.UseCases.GetPaycheck
             }
 
             var inssResult = new Inss().Calculate(employee);
-            var irResult = new IncomeTax().Calculate(employee);
+            var irrfResult = new Irrf().Calculate(employee);
             var dentalInsuranceResult = new DentalInsurance().Calculate(employee);
             var healthInsuranceResult = new HealthInsurance().Calculate(employee);
             var fgtsResult = new Fgts().Calculate(employee);
             var vtResult = new Vt().Calculate(employee);
 
-            var totalDeDescontos = inssResult + irResult + dentalInsuranceResult + healthInsuranceResult + fgtsResult + vtResult;
-            var salarioLiquidoResult = employee.SalarioBruto - totalDeDescontos;
+            var totalDeDescontos = CalculateTotalDesconto(inssResult, irrfResult, dentalInsuranceResult, healthInsuranceResult, fgtsResult, vtResult);
+            var salarioLiquidoResult = CalculateSalarioLiquido(employee.SalarioBruto, totalDeDescontos);
 
-            var entriesList = new List<EntriesData> {
-                new EntriesData { Tipo = "Remuneração", Valor = employee.SalarioBruto, Descricao = "Salário Bruto" }
-            };
-
-            AddEntry(inssResult, "Inss", entriesList);
-            AddEntry(irResult, "Imposto de Renda", entriesList);
-            AddEntry(dentalInsuranceResult, "Plano Dentário", entriesList);
-            AddEntry(healthInsuranceResult, "Plano de Saúde", entriesList);
-            AddEntry(fgtsResult, "Fgts", entriesList);
-            AddEntry(vtResult, "Vale Transporte", entriesList);
-
-            GetPaycheckByIdOutput output = new GetPaycheckByIdOutput(
+            var output = new GetPaycheckByIdOutput(
                 employee.Id,
-                employee.DataDeAdmissao.Month.ToString(),
+                employee.DataDeAdmissao,
                 employee.SalarioBruto,
                 -totalDeDescontos,
-                salarioLiquidoResult,
-                entriesList
-            ); ;
+                salarioLiquidoResult
+            );
+
+            output.BuildDiscountEntries(inssResult, irrfResult, dentalInsuranceResult, healthInsuranceResult, fgtsResult, vtResult);
 
             return ResponseUseCase.Ok(output);
         }
 
-        public void AddEntry(decimal valor, string descricao, List<EntriesData> entriesData)
+        static decimal CalculateTotalDesconto(decimal inss, decimal ir, decimal dentalInsurance, decimal healthInsurance, decimal fgts, decimal vt)
         {
-            if (valor != 0)
-            {
-                entriesData.Add(new EntriesData { Tipo = "Desconto", Valor = valor, Descricao = descricao });
-            }
+            return inss + ir + dentalInsurance + healthInsurance + fgts + vt;
+        }
+
+        static decimal CalculateSalarioLiquido(decimal salarioBruto, decimal totalDescontos)
+        {
+            return salarioBruto - totalDescontos;
         }
     }
 }

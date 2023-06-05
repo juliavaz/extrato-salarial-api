@@ -2,6 +2,7 @@
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using ExtratoSalarial.Core.Domain.UseCases.GetEmployeeById;
 using ExtratoSalarial.Test.Mocks;
+using FluentValidation;
 using Moq;
 using System.Net;
 
@@ -10,12 +11,14 @@ namespace ExtratoSalarial.Test.Domain.UseCases
     public class GetEmployeeByIdUseCaseTest
     {
         private readonly Mock<IEmployeeRepository> _employeeRepository;
+        private readonly IValidator<GetEmployeeByIdInput> _validator;
         private GetEmployeeByIdInput _input;
 
         public GetEmployeeByIdUseCaseTest()
         {
             _employeeRepository = new Mock<IEmployeeRepository>();
             _input = new GetEmployeeByIdInput();
+            _validator = new GetEmployeeByIdValidation();
         }
 
         [Fact]
@@ -27,7 +30,7 @@ namespace ExtratoSalarial.Test.Domain.UseCases
 
             _input.Id = "647a91808b643cfecf0b1f38";
 
-            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object);
+            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object, _validator);
             var response = await useCase.Handle(_input);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -37,7 +40,7 @@ namespace ExtratoSalarial.Test.Domain.UseCases
         [Fact]
         public async void Given_Employee_When_InputIsInvalid_Then_ExpectedBadRequest()
         {
-            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object);
+            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object, _validator);
             var response = await useCase.Handle(_input);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -53,7 +56,7 @@ namespace ExtratoSalarial.Test.Domain.UseCases
 
             _input.Id = "647a91808b643cfecf0b1f38";
 
-            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object);
+            var useCase = new GetEmployeeByIdUseCase(_employeeRepository.Object, _validator);
             var response = await useCase.Handle(_input);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
