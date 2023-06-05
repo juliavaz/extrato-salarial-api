@@ -10,7 +10,6 @@ services:
       - mongo
     ports: 
       - 8080:80
-      - 8090:443
   mongo:
     image: mongo
     hostname: mongo

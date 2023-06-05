@@ -33,7 +33,7 @@ namespace ExtratoSalarial.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint para obter todos os dados dos funcionários
+        /// Endpoint para obter todos os dados dos funcionarios
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -49,7 +49,7 @@ namespace ExtratoSalarial.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint para obter dados por funcionário
+        /// Endpoint para obter dados por funcionario
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -67,14 +67,14 @@ namespace ExtratoSalarial.Api.Controllers
 
 
         /// <summary>
-        /// Endpoint para criar um funcionário
+        /// Endpoint para criar um funcionario
         /// </summary>
         /// <returns></returns>
         /// /// <remarks>
         /// Sample request:
         /// 
         ///     {
-        ///       "nome": "Júlia",
+        ///       "nome": "Julia",
         ///       "sobrenome": "Gomes",
         ///       "documento": "320.513.371-44",
         ///       "setor": "Tecnologia",
@@ -99,7 +99,7 @@ namespace ExtratoSalarial.Api.Controllers
         }
 
         /// <summary>
-        /// Endpoint para obter extrato de contracheque por funcionário
+        /// Endpoint para obter extrato de contracheque por funcionario
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
