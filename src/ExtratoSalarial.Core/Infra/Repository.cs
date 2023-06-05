@@ -1,9 +1,11 @@
 ﻿using ExtratoSalarial.Core.Domain.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ExtratoSalarial.Core.Infra
 {
+    [ExcludeFromCodeCoverage]
     public abstract class Repository<T> where T : Entity
     {
         private readonly IMongoCollection<T> _collection;

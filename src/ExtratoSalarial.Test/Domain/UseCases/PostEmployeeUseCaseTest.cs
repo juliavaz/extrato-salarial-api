@@ -2,6 +2,7 @@
 using ExtratoSalarial.Core.Domain.Interfaces.Repositories;
 using ExtratoSalarial.Core.Domain.UseCases.PostEmployee;
 using ExtratoSalarial.Test.Mocks;
+using FluentValidation;
 using Moq;
 using System.Net;
 
@@ -10,12 +11,12 @@ namespace ExtratoSalarial.Test.Domain.UseCases
     public class PostEmployeeUseCaseTest
     {
         private readonly Mock<IEmployeeRepository> _employeeRepository;
-        private PostEmployeeInput _input;
+        private readonly IValidator<PostEmployeeInput> _validator;
 
         public PostEmployeeUseCaseTest()
         {
             _employeeRepository = new Mock<IEmployeeRepository>();
-            _input = BuildPostEmployeeInput();
+            _validator = new PostEmployeeValidation();
         }
 
         [Fact]
@@ -25,8 +26,8 @@ namespace ExtratoSalarial.Test.Domain.UseCases
                 .Setup(x => x.CreateAsync(It.IsAny<Employee>()))
                 .Returns(() => Task.FromResult(BaseMock.BuildEmployee()));
 
-            var useCase = new PostEmployeeUseCase(_employeeRepository.Object);
-            var response = await useCase.Handle(_input);
+            var useCase = new PostEmployeeUseCase(_employeeRepository.Object, _validator);
+            var response = await useCase.Handle(BuildPostEmployeeInput());
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             _employeeRepository.Verify(x => x.CreateAsync(It.IsAny<Employee>()), Times.Once);
@@ -35,7 +36,7 @@ namespace ExtratoSalarial.Test.Domain.UseCases
         [Fact]
         public async void Given_Paycheck_When_InputIsInvalid_Then_ExpectedBadRequest()
         {
-            var useCase = new PostEmployeeUseCase(_employeeRepository.Object);
+            var useCase = new PostEmployeeUseCase(_employeeRepository.Object, _validator);
             var response = await useCase.Handle(new PostEmployeeInput());
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

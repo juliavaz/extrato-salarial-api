@@ -104,7 +104,7 @@ namespace ExtratoSalarial.Api.Controllers
         /// <param name="employeeId"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("paycheck/{employeeId}")]
+        [Route("{employeeId}/paycheck")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
