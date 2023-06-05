@@ -54,7 +54,7 @@ docker compose up -d
 
 ![comando-docker-compose](docker-compose.png "comando docker-compose via terminal")
 
-Para executar a api, entre na url [https://localhost:8080/swagger/index.html](https://localhost:8080/swagger/index.html)
+Para executar a api, entre na url [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)
 
 Para uma melhor experiência, inicie criando um funcionário pelo `POST - api/employees` dessa forma terá acesso aos outros endpoints.
 
