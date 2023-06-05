@@ -45,18 +45,20 @@ Realize a instalação do Docker seguindo a [documentação oficial](https://www.doc
 
 ## <a name="build-exec"></a> Build e Execução
 
-Digite o comando abaixo em seu terminal, dentro do diretório `src/`:
+O comando a seguir irá inicializar um container docker, no qual é responsável por instalar todas as dependências necessárias, junto a outro container de banco de dados para a utilização da api.
+
+Digite o comando abaixo em seu terminal, dentro do diretório `src/`
 ```
 docker compose up -d
 ```
 
 ![comando-docker-compose](docker-compose.png "comando docker-compose via terminal")
 
-Para executar a api, entre na url [https://localhost:8090/swagger/index.html](https://localhost:8090/swagger/index.html) e execute os endpoints.
-
-![web-api](web-api.png "web api em execução")
+Para executar a api, entre na url [https://localhost:8080/swagger/index.html](https://localhost:8080/swagger/index.html)
 
 Para uma melhor experiência, inicie criando um funcionário pelo `POST - api/employees` dessa forma terá acesso aos outros endpoints.
+
+![web-api](web-api.png "web api em execução")
 
 ## <a name="references"></a> Referências e Links
 
