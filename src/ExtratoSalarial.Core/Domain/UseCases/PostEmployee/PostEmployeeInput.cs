@@ -29,7 +29,7 @@ namespace ExtratoSalarial.Core.Domain.UseCases.PostEmployee
                 .MaximumLength(150);
 
             RuleFor(x => x.Documento)
-                .NotEmpty().WithMessage("Informe o CPF do funcionário")
+                .NotEmpty().WithMessage("Informe o CPF do funcionário com formato válido")
                 .Matches(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$").WithMessage("CPF inválido");
 
             RuleFor(x => x.Setor)

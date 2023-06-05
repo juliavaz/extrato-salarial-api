@@ -44,7 +44,7 @@ builder.Services.AddSwaggerGen(options =>
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {
-            Name = "by e-mail",
+            Name = "by e-mail (juvaz.gomes@gmail.com)",
             Email = "juvaz.gomes@gmail.com"
         },
         License = new OpenApiLicense
@@ -67,8 +67,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
